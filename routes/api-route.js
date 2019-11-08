@@ -47,8 +47,10 @@ router.get("/scrape", function (request, response) {
 });
 
 // POST route for saving a notes associated to an Article
-router.post("/submit", function(req, res) {
-    // Create a new Book in the database
+router.post("/submit/:id", function(req, res) {
+    // Create a Note and attach it to the Article
+    console.log("req params id "+req.params.id);
+    console.log("req body "+ req.body);
     db.Note.create(req.body)
       .then(function(dbNote) {
         // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
@@ -69,6 +71,7 @@ router.post("/submit", function(req, res) {
 // Route for getting all Articles from the db
 router.get("/articles", function (req, res) {
     db.Article.find({})
+        .populate("notes")
         .then(function (dbArticle) {
             res.json(dbArticle);
         })
