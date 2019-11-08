@@ -2,11 +2,8 @@ var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-var axios = require("axios");
-var cheerio = require("cheerio");
-
-// Require all models
-//var db = require("./models");
+// var axios = require("axios");
+// var cheerio = require("cheerio");
 
 var PORT = process.env.PORT || 8080;
 
@@ -35,9 +32,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
-//var routes = require("./routes/api-route.js");
+var routes = require("./routes/api-route.js");
 
-//app.use(routes);
+app.use(routes);
 
 // Start the server
 app.listen(PORT, function() {
