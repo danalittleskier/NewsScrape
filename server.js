@@ -1,6 +1,7 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
 
 // var axios = require("axios");
 // var cheerio = require("cheerio");
@@ -38,5 +39,9 @@ app.use(routes);
 
 // Start the server
 app.listen(PORT, function() {
-    console.log("App running on port " + PORT + "!");
+    console.log(
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT,
+      PORT
+    );
   });
