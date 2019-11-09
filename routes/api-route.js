@@ -77,7 +77,7 @@ router.get("/articles", function (req, res) {
 });
 
 router.get("/delete/:id", function(req, res) {
-    db.Article.remove(
+    db.Article.deleteOne(
       {
         _id: req.params.id
       },
