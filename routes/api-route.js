@@ -17,7 +17,7 @@ router.get("/scrape", function (request, response) {
             var article = {};
             article.title = $(element).find("h2").text().trim();
             article.link = $(element).find("a").attr("href").trim();
-            article.summary = $(element).first("p").text().trim();
+            article.summary = $(element).find(".article-excerpt").find("p").text().trim();
             article.image = $(element).find("img").attr("src").trim();
             article.article_date = $(element).find(".article-date").text().trim();
 
