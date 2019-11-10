@@ -12,12 +12,12 @@ $.getJSON("/articles", function (data) {
                               <ul class="list-group list-group-flush">`);
 
     for (var j = 0; j < data[i].notes.length; j++) {
-      $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' id='removenote' class='btn btn-outline-danger btn-sm' data-noteid='${data[i].notes[j]._id}'>Remove Note</button> </li>`)
+      $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button> </li>`)
     }
     $articleCard.append(`</ul><div class="card-body">
-                             <button type='button' id='deletearticle' class='btn btn-outline-danger btn-sm' data-articleid='${data[i]._id}'>Delete Article</button>
-                             <button type='button' id='articlebutton' class='btn btn-outline-primary btn-sm' 
-                              data-articleid='${data[i]._id}' data-toggle='modal' data-target='#notesModal'>Add Note</button></div>`)
+                             <button type='button' class='btn btn-outline-danger btn-sm deletearticle' data-articleid='${data[i]._id}'>Delete Article</button>
+                             <button type='button' class='btn btn-outline-primary btn-sm articlebutton' 
+                              data-articleid='${data[i]._id}' data-toggle='modal' data-target='.notesModal'>Add Note</button></div>`)
 
     $('#articles').append($articleCard);
   }
@@ -37,9 +37,9 @@ $(document).on("click", "#scrape", function () {
 });
 
 // When you click the savenote button
-$(document).on("click", "#savenote", function () {
+$(document).on("click", ".savenote", function () {
   // Grab the id associated with the article from the submit button
-  var articleId = $("#articlebutton").attr("data-articleid");
+  var articleId = $(this).attr("data-articleid");
 
   var noteTitle = $("#note-title").val();
   var noteBody = $("#note-body").val();
@@ -71,10 +71,10 @@ $(document).on("click", "#savenote", function () {
 });
 
 // When you click the delete article
-$(document).on("click", "#deletearticle", function () {
+$(document).on("click", ".deletearticle", function () {
   // Grab the id associated with the article from the delete button
-  var articleId = $("#deletearticle").attr("data-articleid");
-
+  var articleId = $(this).attr("data-articleid");
+console.log("delete id "+articleId);
   $.ajax({
     method: "GET",
     url: "/delete/" + articleId,
@@ -89,9 +89,9 @@ $(document).on("click", "#deletearticle", function () {
 
 
 // When you click the remove note
-$(document).on("click", "#removenote", function () {
+$(document).on("click", ".removenote", function () {
   // Grab the id associated with the article from the delete button
-  var noteId = $("#removenote").attr("data-noteid");
+  var noteId = $(this).attr("data-noteid");
   console.log("note id " + noteId);
 
   $.ajax({

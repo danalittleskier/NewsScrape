@@ -80,6 +80,7 @@ router.get("/articles", function (req, res) {
 //Delete article by id
 router.get("/delete/:id", function(req, res) {
     //Find article then delete the notes that belong to it then the article
+    console.log("what came in as id "+req.params.id);
     db.Article.findById(req.params.id)
      .then(function(dbArticle){
 
