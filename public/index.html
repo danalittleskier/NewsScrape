@@ -15,29 +15,31 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
   <div id="wrapper">
     <div class="container">
-      <h1>Note Scraper</h1>
-      <h2>Scrape <button type="button" id="scrape" class="btn btn-primary btn-lg active" role="button"
-          aria-pressed="true">Ski Racing
-          Web Site</a></h2>
+      <!-- Image and text -->
+      <nav class="navbar navbar-light bg-light">
+          <form class="form-inline">
+              <button id="scrape" class="btn btn-light btn-lg active" type="button">Scrape Ski Racing News!</button>
+            </form>
+      </nav>
+
       <div class="container">
         <div class="row">
-          <div class="col-sm-4">
-              <div id="articles">
-                </div>
+          <div id="articles">
           </div>
-          
+
         </div>
       </div>
 
       <div id="notes"></div>
     </div>
   </div>
-  <!-- Modal -->
+  <!-- Modal for the Note Insert -->
   <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">

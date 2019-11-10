@@ -1,0 +1,9 @@
+#articles {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 20px;
+}
+
+.card {
+    display:inline-block;
+}

@@ -17,7 +17,7 @@ router.get("/scrape", function (request, response) {
             var article = {};
             article.title = $(element).find("h2").text().trim();
             article.link = $(element).find("a").attr("href").trim();
-            article.summary = $(element).find("p").text().trim();
+            article.summary = $(element).first("p").text().trim();
             article.image = $(element).find("img").attr("src").trim();
             article.article_date = $(element).find(".article-date").text().trim();
 
@@ -83,6 +83,7 @@ router.get("/delete/:id", function(req, res) {
     db.Article.findById(req.params.id)
      .then(function(dbArticle){
 
+        //For each note in the article remove it
         dbArticle.notes.map(note => 
             db.Note.findByIdAndDelete(note)
             .then(function(dbNote){
@@ -105,6 +106,18 @@ router.get("/delete/:id", function(req, res) {
         res.json(err);
     });
 
+  });
+
+  //Delete note by id
+  router.get("/remove/:id", function(req, res) {
+    console.log("delete note "+req.params.id);
+    db.Note.findByIdAndDelete(req.params.id)
+        .then(function(dbNote){
+            res.send(dbNote);
+        })
+        .catch(function (err) {
+            res.send(err);
+        });
   });
 
 // Export routes for server.js to use.
