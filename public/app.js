@@ -36,45 +36,50 @@ $(document).on("click", "#scrape", function () {
 
 });
 
-// When you click the savenote button
-$(document).on("click", ".savenote", function () {
-  // Grab the id associated with the article from the submit button
+$(document).on("click", ".articlebutton", function () {
+  //Keeep track of the article id where the note goes to
   var articleId = $(this).attr("data-articleid");
 
-  var noteTitle = $("#note-title").val();
-  var noteBody = $("#note-body").val();
+  $(".savenote").on("click", function () {
 
-  if (noteTitle === "" || noteBody === "") {
-    alert("You need to enter a note title and body.");
-    return;
-  }
+    var noteTitle = $("#note-title").val();
+    var noteBody = $("#note-body").val();
 
-  // Run a POST request to change the note, using what's entered in the inputs
-  $.ajax({
-    method: "POST",
-    url: "/submit/" + articleId,
-    data: {
-      // Value taken from title input
-      title: noteTitle,
-      // Value taken from note textarea
-      body: noteBody
+    if (noteTitle === "" || noteBody === "") {
+      alert("You need to enter a note title and body.");
+      return;
     }
-  })
-    // With that done
-    .then(function (data) {
-      // Log the response
-      console.log(data);
-      location.reload();
-      // Empty the notes section
-    });
+
+    // Run a POST request to change the note, using what's entered in the inputs
+    $.ajax({
+      method: "POST",
+      url: "/submit/" + articleId,
+      data: {
+        // Value taken from title input
+        title: noteTitle,
+        // Value taken from note textarea
+        body: noteBody
+      }
+    })
+      // With that done
+      .then(function (data) {
+        // Log the response
+        console.log(data);
+        location.reload();
+        // Empty the notes section
+      });
+
+  });
 
 });
+
+
 
 // When you click the delete article
 $(document).on("click", ".deletearticle", function () {
   // Grab the id associated with the article from the delete button
   var articleId = $(this).attr("data-articleid");
-console.log("delete id "+articleId);
+  console.log("delete id " + articleId);
   $.ajax({
     method: "GET",
     url: "/delete/" + articleId,
