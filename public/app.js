@@ -1,11 +1,8 @@
 // Grab the articles as a json
 $.getJSON("/articles", function (data) {
-  $('#articles').append(`<div class="container">`)
-  
   // For each one
   for (var i = 0; i < data.length; i++) {
-    $('#articles').append(`<div class="col-md-4">`)
-    var $articleCard = $(`<div class="card" style="width: 22rem;">`);
+    var $articleCard = $(`<div class="card my-2" style="width: 18rem;">`);
 
     // Display the apropos information on the page
     //$('#articles').append(`<div class="row>`);
@@ -34,10 +31,10 @@ $.getJSON("/articles", function (data) {
     //   $("#articles").append(`<p><i>${data[i].notes[j].body}<i><span><button type='button' id='deletenote' class='btn btn-outline-danger btn-sm' data-noteid='${data[i]._id}'>Remove Note</button> </span></p>`);
     //   $('#articles').append(`</div>`);
     // }
-    $articleCard.append("</div>");
+    //$articleCard.append("</div>");
     $('#articles').append($articleCard);
   }
-  
+ 
 });
 
 // When you click the savenote button

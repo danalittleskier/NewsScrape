@@ -64,6 +64,7 @@ router.post("/submit/:id", function(req, res) {
   });
 
 // Route for getting all Articles from the db
+//Grab the notes that go with article and sort the articles by date descending
 router.get("/articles", function (req, res) {
     db.Article.find({})
         .populate("notes")
@@ -76,24 +77,34 @@ router.get("/articles", function (req, res) {
         });
 });
 
+//Delete article by id
 router.get("/delete/:id", function(req, res) {
-    db.Article.deleteOne(
-      {
-        _id: req.params.id
-      },
-      function(error, removed) {
-        if (error) {
-          console.log(error);
-          res.send(error);
-        }
-        else {
-          // Otherwise, send the mongojs response to the browser
-          // This will fire off the success function of the ajax request
-          console.log(removed);
-          res.send(removed);
-        }
-      }
-    );
+    //Find article then delete the notes that belong to it then the article
+    db.Article.findById(req.params.id)
+     .then(function(dbArticle){
+
+        dbArticle.notes.map(note => 
+            db.Note.findByIdAndDelete(note)
+            .then(function(dbNote){
+                console.log(dbNote);
+            })
+            .catch(function (err) {
+                res.send(err);
+            }));
+
+        db.Article.findByIdAndDelete(req.params.id)
+            .then(function(dbArticle){
+                console.log(dbArticle);
+            })
+            .catch(function (err){
+                res.send(err);
+            });
+
+     })
+     .catch(function (err) {
+        res.json(err);
+    });
+
   });
 
 // Export routes for server.js to use.
