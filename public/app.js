@@ -13,7 +13,7 @@ $.getJSON("/articles", function (data) {
                               <h5 class="card-title"><a href="${data[i].link}" target="_blank">${data[i].title}</a></h5>
                               <p class="card-text">${data[i].summary} <br><i>${articleDate}</i></p></div>
                               <ul class="list-group list-group-flush">`);
-s
+
     for (var j = 0; j < data[i].notes.length; j++) {
       $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button> </li>`)
     }
