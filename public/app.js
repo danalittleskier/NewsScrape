@@ -1,16 +1,19 @@
-//var moment = require("moment");
+
 
 // Grab the articles as a json
 $.getJSON("/articles", function (data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
-    var $articleCard = $(`<div class="card my-2" style="width: 18rem;">`);
+    let $articleCard = $(`<div class="card border-light mx-2 px-2">`);
+    let articleDate = new Date(data[i].article_date);
+    articleDate = articleDate.toDateString();
+
     $articleCard.append(`<img class="card-img-top" src="${data[i].image}" alt="News Image">
                               <div class="card-body">
                               <h5 class="card-title"><a href="${data[i].link}" target="_blank">${data[i].title}</a></h5>
-                              <p class="card-text">${data[i].summary} <br><i>${data[i].article_date}</i></p></div>
+                              <p class="card-text">${data[i].summary} <br><i>${articleDate}</i></p></div>
                               <ul class="list-group list-group-flush">`);
-
+s
     for (var j = 0; j < data[i].notes.length; j++) {
       $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button> </li>`)
     }
