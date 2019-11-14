@@ -15,7 +15,7 @@ $.getJSON("/articles", function (data) {
                               <ul class="list-group list-group-flush">`);
 
     for (var j = 0; j < data[i].notes.length; j++) {
-      $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button> </li>`)
+      $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button></li>`)
     }
     $articleCard.append(`</ul><div class="card-body">
                              <button type='button' class='btn btn-outline-danger btn-sm deletearticle' data-articleid='${data[i]._id}'>Delete Article</button>
@@ -76,6 +76,17 @@ $(document).on("click", ".articlebutton", function () {
 
 });
 
+// When you click the savenote button
+$(document).on("click", "#deleteAll", function () {
+  $.ajax({
+    method: "DELETE",
+    url: "/deleteAll"
+  })
+    .then(function (response) {
+      location.reload();
+    });
+
+});
 
 
 // When you click the delete article
@@ -100,11 +111,28 @@ $(document).on("click", ".deletearticle", function () {
 $(document).on("click", ".removenote", function () {
   // Grab the id associated with the article from the delete button
   var noteId = $(this).attr("data-noteid");
-  console.log("note id " + noteId);
+  console.log("remove note id " + noteId);
 
   $.ajax({
     method: "GET",
     url: "/remove/" + noteId,
+    // On successful call
+    success: function (response) {
+      location.reload();
+    }
+  });
+
+});
+
+// When you click the update note
+$(document).on("click", ".updatenote", function () {
+  // Grab the id associated with the article from the delete button
+  var noteId = $(this).attr("data-noteid");
+  console.log("update note id " + noteId);
+
+  $.ajax({
+    method: "PUT",
+    url: "/update/" + noteId,
     // On successful call
     success: function (response) {
       location.reload();

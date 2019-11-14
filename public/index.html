@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Scraping With Mongoose</title>
+  <title>Scraping Ski Racing News</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -23,24 +23,25 @@
     <div class="container">
       <!-- Image and text -->
       <nav class="navbar navbar-light bg-light">
-          <form class="form-inline">
-              <button id="scrape" class="btn btn-light btn-lg active" type="button">Scrape Ski Racing News!</button>
-            </form>
+        <form class="form-inline">
+          <button id="scrape" class="btn btn-light btn-lg mx-4 active" type="button">Scrape Ski Racing News!</button>
+
+          <button id="deleteAll" class="btn btn-light btn-lg mx-4 active" type="button">Delete All Articles</button>
+        </form>
       </nav>
       <div class="container">
-          <div class="row" >
-              <div class="row" id="articles" >
-              </div>
-         </div>       
+        <div class="row">
+          <div class="row" id="articles">
+          </div>
+        </div>
 
       </div>
-          
+
       <div id="notes"></div>
     </div>
   </div>
   <!-- Modal for the Note Insert -->
-  <div class="modal fade notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel"
-    aria-hidden="true">
+  <div class="modal fade notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
