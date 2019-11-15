@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+
+<body>
+  <div id="wrapper">
+    <div class="container">
+      <!-- Image and text -->
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <button id="scrape" class="btn btn-light btn-lg mx-4 active" type="button">Scrape Ski Racing News!</button>
+
+          <button id="deleteAll" class="btn btn-light btn-lg mx-4 active" type="button">Delete All Articles</button>
+        </form>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="row" id="articles">
+            {{#each articles}}
+            <div class="card border-light mx-2 px-2">
+              <img class="card-img-top" src="{{this.image}}" alt="News Image">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{this.link}}" target="_blank">{{this.title}}</a></h5>
+                <p class="card-text">{{this.summary}} <br><i>{{this.article_date}}</i></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                {{#each this.notes}}
+                <li class="list-group-item">{{this.body}}<button type='button'
+                    class='btn btn-outline-danger btn-sm removenote' data-noteid='{{this._id}}'>Remove Note</button>
+                </li>
+                {{/each}}
+              </ul>
+              <div class="card-body">
+                <button type='button' class='btn btn-outline-danger btn-sm deletearticle'
+                  data-articleid='{{this._id}}'>Delete Article</button>
+                <button type='button' class='btn btn-outline-primary btn-sm articlebutton' data-articleid='{{this._id}}'
+                  data-toggle='modal' data-target='.notesModal'>Add Note</button>
+             </div>
+
+            </div>
+            {{/each}}
+          </div>
+
+        </div>
+
+        <div id="notes"></div>
+      </div>
+    </div>
+    <!-- Modal for the Note Insert -->
+    <div class="modal fade notesModal" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="notesModalLabel">Note </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Title:</label>
+                <input type="text" class="form-control" id="note-title">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Text:</label>
+                <textarea class="form-control" id="note-body"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary savenote">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

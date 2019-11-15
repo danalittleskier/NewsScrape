@@ -6,6 +6,24 @@ var router = express.Router();
 //Require all models
 var db = require("../models");
 
+
+//Find all articles and return them
+router.get("/", function (req, res) {
+    db.Article.find({})
+        .populate("notes")
+        .sort({ article_date: -1 })
+        .then(function (dbArticles) {
+            //res.json(dbArticle);
+            res.render("index", {
+                msg: "Welcome!",
+                articles: dbArticles
+              });
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
 router.get("/scrape", function (request, response) {
     axios.get("https://www.skiracing.com/stories").then(function (response) {
 
@@ -71,18 +89,6 @@ router.delete("/deleteAll", function (req, res) {
         });
 });
 
-//Find all articles and return them
-router.get("/articles", function (req, res) {
-    db.Article.find({})
-        .populate("notes")
-        .sort({ article_date: -1 })
-        .then(function (dbArticle) {
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
-            res.json(err);
-        });
-});
 
 //Delete article by id
 router.get("/delete/:id", function (req, res) {

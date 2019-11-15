@@ -1,31 +1,31 @@
 
 
 // Grab the articles as a json
-$.getJSON("/articles", function (data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    let $articleCard = $(`<div class="card border-light mx-2 px-2">`);
-    let articleDate = new Date(data[i].article_date);
-    articleDate = articleDate.toDateString();
+// $.getJSON("/articles", function (data) {
+//   // For each one
+//   for (var i = 0; i < data.length; i++) {
+//     let $articleCard = $(`<div class="card border-light mx-2 px-2">`);
+//     let articleDate = new Date(data[i].article_date);
+//     articleDate = articleDate.toDateString();
 
-    $articleCard.append(`<img class="card-img-top" src="${data[i].image}" alt="News Image">
-                              <div class="card-body">
-                              <h5 class="card-title"><a href="${data[i].link}" target="_blank">${data[i].title}</a></h5>
-                              <p class="card-text">${data[i].summary} <br><i>${articleDate}</i></p></div>
-                              <ul class="list-group list-group-flush">`);
+//     $articleCard.append(`<img class="card-img-top" src="${data[i].image}" alt="News Image">
+//                               <div class="card-body">
+//                               <h5 class="card-title"><a href="${data[i].link}" target="_blank">${data[i].title}</a></h5>
+//                               <p class="card-text">${data[i].summary} <br><i>${articleDate}</i></p></div>
+//                               <ul class="list-group list-group-flush">`);
 
-    for (var j = 0; j < data[i].notes.length; j++) {
-      $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button></li>`)
-    }
-    $articleCard.append(`</ul><div class="card-body">
-                             <button type='button' class='btn btn-outline-danger btn-sm deletearticle' data-articleid='${data[i]._id}'>Delete Article</button>
-                             <button type='button' class='btn btn-outline-primary btn-sm articlebutton' 
-                              data-articleid='${data[i]._id}' data-toggle='modal' data-target='.notesModal'>Add Note</button></div>`)
+//     for (var j = 0; j < data[i].notes.length; j++) {
+//       $articleCard.append(`<li class="list-group-item">${data[i].notes[j].body}<button type='button' class='btn btn-outline-danger btn-sm removenote' data-noteid='${data[i].notes[j]._id}'>Remove Note</button></li>`)
+//     }
+//     $articleCard.append(`</ul><div class="card-body">
+//                              <button type='button' class='btn btn-outline-danger btn-sm deletearticle' data-articleid='${data[i]._id}'>Delete Article</button>
+//                              <button type='button' class='btn btn-outline-primary btn-sm articlebutton' 
+//                               data-articleid='${data[i]._id}' data-toggle='modal' data-target='.notesModal'>Add Note</button></div>`)
 
-    $('#articles').append($articleCard);
-  }
+//     $('#articles').append($articleCard);
+//   }
 
-});
+// });
 
 // When you click the savenote button
 $(document).on("click", "#scrape", function () {
